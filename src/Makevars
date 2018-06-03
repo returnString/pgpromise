@@ -1,0 +1,3 @@
+CXX_STD = CXX11
+PKG_CPPFLAGS = -I`pg_config --includedir` -I`pg_config --includedir-server` $(SHLIB_PTHREAD_FLAGS)
+PKG_LIBS = -L`pg_config --libdir` -lpq $(SHLIB_PTHREAD_FLAGS)

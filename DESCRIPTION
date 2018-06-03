@@ -1,0 +1,11 @@
+Package: pgpromise
+Type: Package
+Title: Promisified Async PostgreSQL Queries
+Version: 0.1
+Date: 2018-06-02
+Author: Ruan Pearce-Authers
+Maintainer: Ruan Pearce-Authers <ruanpa@outlook.com>
+Description: Asynchronous PostgreSQL queries using promises against a threadpool.
+License: MIT
+Imports: Rcpp (>= 0.12.17), later, promises, RPostgreSQL, DBI, dbplyr
+LinkingTo: Rcpp, later

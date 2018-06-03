@@ -1,0 +1,5 @@
+useDynLib(pgpromise, .registration=TRUE)
+importFrom(Rcpp, evalCpp)
+import(later)
+export(create_postgres_pool)
+export(collect_async)
