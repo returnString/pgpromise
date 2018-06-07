@@ -163,16 +163,17 @@ private:
 			case INT4OID:
 			case INT8OID:
 			{
-				auto numVec = Rcpp::NumericVector::create();
-				for (const auto& field : column.values)
+				Rcpp::NumericVector numVec(column.values.size());
+				for (size_t i = 0; i < column.values.size(); ++i)
 				{
+					const auto& field = column.values[i];
 					if (field.null)
 					{
-						numVec.push_back(NA_REAL);
+						numVec[i] = NA_REAL;
 					}
 					else
 					{
-						numVec.push_back(std::stoi(field.value));
+						numVec[i] = std::stol(field.value);
 					}
 				}
 				return numVec;
@@ -183,16 +184,17 @@ private:
 			case FLOAT8OID:
 			case NUMERICOID:
 			{
-				auto numVec = Rcpp::NumericVector::create();
-				for (const auto& field : column.values)
+				Rcpp::NumericVector numVec(column.values.size());
+				for (size_t i = 0; i < column.values.size(); ++i)
 				{
+					const auto& field = column.values[i];
 					if (field.null)
 					{
-						numVec.push_back(NA_REAL);
+						numVec[i] = NA_REAL;
 					}
 					else
 					{
-						numVec.push_back(std::stod(field.value));
+						numVec[i] = std::stod(field.value);
 					}
 				}
 				return numVec;
@@ -203,16 +205,17 @@ private:
 			case BPCHAROID:
 			case VARCHAROID:
 			{
-				auto charVec = Rcpp::CharacterVector::create();
-				for (const auto& field : column.values)
+				Rcpp::CharacterVector charVec(column.values.size());
+				for (size_t i = 0; i < column.values.size(); ++i)
 				{
+					const auto& field = column.values[i];
 					if (field.null)
 					{
-						charVec.push_back(NA_STRING);
+						charVec[i] = NA_STRING;
 					}
 					else
 					{
-						charVec.push_back(field.value);
+						charVec[i] = field.value;
 					}
 				}
 				return charVec;
@@ -221,19 +224,19 @@ private:
 				
 			case TIMESTAMPOID:
 			{
-				auto dateTimeVec = Rcpp::DatetimeVector::create();
-				for (const auto& field : column.values)
+				Rcpp::DatetimeVector dateTimeVec(column.values.size());
+				for (size_t i = 0; i < column.values.size(); ++i)
 				{
+					const auto& field = column.values[i];
 					if (field.null)
 					{
-						dateTimeVec.push_back(Rcpp::DatetimeVector::get_na());
+						dateTimeVec[i] = Rcpp::DatetimeVector::get_na();
 					}
 					else
 					{
-						dateTimeVec.push_back(Rcpp::Datetime(field.value));
+						dateTimeVec[i] = Rcpp::Datetime(field.value);
 					}
 				}
-				
 				dateTimeVec.attr("class") = "POSIXct";
 				return dateTimeVec;
 			}
@@ -241,19 +244,19 @@ private:
 				
 			case DATEOID:
 			{
-				auto dateVec = Rcpp::DateVector::create();
-				for (const auto& field : column.values)
+				Rcpp::DateVector dateVec(column.values.size());
+				for (size_t i = 0; i < column.values.size(); ++i)
 				{
+					const auto& field = column.values[i];
 					if (field.null)
 					{
-						dateVec.push_back(Rcpp::DateVector::get_na());
+						dateVec[i] = Rcpp::DateVector::get_na();
 					}
 					else
 					{
-						dateVec.push_back(Rcpp::Date(field.value));
+						dateVec[i] = Rcpp::Date(field.value);
 					}
 				}
-				
 				dateVec.attr("class") = "Date";
 				return dateVec;
 			}
@@ -261,16 +264,17 @@ private:
 				
 			case BOOLOID:
 			{
-				auto boolVec = Rcpp::LogicalVector::create();
-				for (const auto& field : column.values)
+				Rcpp::LogicalVector boolVec(column.values.size());
+				for (size_t i = 0; i < column.values.size(); ++i)
 				{
+					const auto& field = column.values[i];
 					if (field.null)
 					{
-						boolVec.push_back(NA_LOGICAL);
+						boolVec[i] = NA_LOGICAL;
 					}
 					else
 					{
-						boolVec.push_back(field.value == "t");
+						boolVec[i] = field.value == "t";
 					}
 				}
 				return boolVec;
