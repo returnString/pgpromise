@@ -316,7 +316,6 @@ private:
 		{
 			if (m_shuttingDown)
 			{
-				lock.unlock();
 				return false;
 			}
 			
