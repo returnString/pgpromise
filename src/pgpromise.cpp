@@ -123,6 +123,7 @@ private:
 					ColumnResult column;
 					column.name = PQfname(res, columnIndex);
 					column.type = PQftype(res, columnIndex);
+					column.values.reserve(rowCount);
 					
 					for (int rowIndex = 0; rowIndex < rowCount; ++rowIndex)
 					{
